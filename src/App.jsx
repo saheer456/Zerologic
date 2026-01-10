@@ -7,6 +7,7 @@ import MobileNav from './components/layout/MobileNav'
 import Sidebar from './components/layout/Sidebar'
 import SidebarToggle from './components/layout/SidebarToggle'
 import ProtectedRoute from './components/auth/ProtectedRoute'
+import ScrollToTop from './components/ScrollToTop'
 import Home from './pages/Home'
 import Dashboard from './pages/Dashboard'
 import Lesson from './pages/Lesson'
@@ -143,6 +144,7 @@ function AppContent() {
 
     return (
         <ProgressContext.Provider value={progressValue}>
+            <ScrollToTop />
             <div className={`app ${!user ? 'auth-view' : ''}`}>
                 {user && <Navbar onToggleSidebar={toggleSidebar} isSidebarOpen={isSidebarOpen} />}
                 {user && <Sidebar isOpen={isSidebarOpen} />}
