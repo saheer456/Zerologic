@@ -1,5 +1,5 @@
 import { Routes, Route } from 'react-router-dom'
-import { useState, createContext, useContext, useEffect, useRef } from 'react'
+import { useState, createContext, useContext, useEffect, useRef, useCallback } from 'react'
 import { AuthProvider, useAuth } from './context/AuthContext'
 import { saveProgress, loadProgress } from './services/progressService'
 import Navbar from './components/layout/Navbar'
