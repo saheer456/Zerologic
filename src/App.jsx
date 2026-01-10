@@ -87,23 +87,26 @@ function AppContent() {
         }
     }, [progress, user])
 
-    const markLessonComplete = (lessonId) => {
+    const markLessonComplete = useCallback((lessonId) => {
         setProgress(prev => ({
             ...prev,
             completedLessons: [...new Set([...prev.completedLessons, lessonId])],
             lastVisited: lessonId
         }))
-    }
+    }, [])
 
-    const setCurrentLesson = (lessonId) => {
-        setProgress(prev => ({
-            ...prev,
-            currentLesson: lessonId,
-            lastVisited: lessonId
-        }))
-    }
+    const setCurrentLesson = useCallback((lessonId) => {
+        setProgress(prev => {
+            if (prev.currentLesson === lessonId) return prev
+            return {
+                ...prev,
+                currentLesson: lessonId,
+                lastVisited: lessonId
+            }
+        })
+    }, [])
 
-    const getPhaseProgress = (phaseId) => {
+    const getPhaseProgress = useCallback((phaseId) => {
         const phaseLessons = lessons.filter(l => l.phase === phaseId)
         const completed = phaseLessons.filter(l =>
             progress.completedLessons.includes(l.id)
@@ -115,9 +118,9 @@ function AppContent() {
                 ? Math.round((completed / phaseLessons.length) * 100)
                 : 0
         }
-    }
+    }, [progress.completedLessons])
 
-    const getTotalProgress = () => {
+    const getTotalProgress = useCallback(() => {
         return {
             completed: progress.completedLessons.length,
             total: lessons.length,
@@ -125,11 +128,11 @@ function AppContent() {
                 ? Math.round((progress.completedLessons.length / lessons.length) * 100)
                 : 0
         }
-    }
+    }, [progress.completedLessons])
 
     const [isSidebarOpen, setSidebarOpen] = useState(false)
 
-    const toggleSidebar = () => setSidebarOpen(!isSidebarOpen)
+    const toggleSidebar = useCallback(() => setSidebarOpen(prev => !prev), [])
 
     const progressValue = {
         ...progress,

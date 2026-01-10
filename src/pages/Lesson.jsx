@@ -19,12 +19,17 @@ function Lesson() {
     const nextLesson = currentIndex < lessons.length - 1 ? lessons[currentIndex + 1] : null
     const isCompleted = completedLessons.includes(lessonId)
 
+    // Set current lesson ID
     useEffect(() => {
-        if (lesson) {
+        if (lessonId) {
             setCurrentLesson(lessonId)
-            window.scrollTo(0, 0)
         }
-    }, [lessonId, lesson, setCurrentLesson])
+    }, [lessonId, setCurrentLesson])
+
+    // Scroll to top ONLY when lesson changes
+    useEffect(() => {
+        window.scrollTo(0, 0)
+    }, [lessonId])
 
     if (!lesson) {
         return (
