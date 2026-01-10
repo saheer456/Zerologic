@@ -2,6 +2,7 @@
     "name": "zerologic",
     "private": true,
     "version": "1.0.0",
+    "homepage": "https://saheer456.github.io/Zerologic/",
     "type": "module",
     "scripts": {
         "dev": "vite",
