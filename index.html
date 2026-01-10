@@ -15,14 +15,42 @@
         rel="stylesheet">
     <title>ZeroLogic - Learn Python Programming</title>
     <script>
-        window.onerror = function (message, source, lineno, colno, error) {
+        // formatting helper
+        function logToScreen(type, args) {
             var root = document.getElementById('root');
-            root.innerHTML = '<div style="color: red; padding: 20px;">' +
-                '<h1>Global Error</h1>' +
-                '<p>Message: ' + message + '</p>' +
-                '<p>Source: ' + source + '</p>' +
-                '<p>Line: ' + lineno + '</p>' +
-                '</div>';
+            var msg = Array.from(args).map(a => {
+                try { return typeof a === 'object' ? JSON.stringify(a) : String(a); }
+                catch (e) { return String(a); }
+            }).join(' ');
+
+            var div = document.createElement('div');
+            div.style.padding = '5px';
+            div.style.borderBottom = '1px solid #333';
+            div.style.color = type === 'error' ? '#ff5555' : '#aaaaaa';
+            div.style.fontFamily = 'monospace';
+            div.style.fontSize = '12px';
+            div.innerText = '[' + type.toUpperCase() + '] ' + msg;
+
+            // Should prompt loading text if it's the first log
+            if (root.innerText === 'Loading ZeroLogic...') {
+                root.innerHTML = '';
+                root.style.display = 'block';
+                root.style.height = 'auto';
+                root.style.justifyContent = 'flex-start';
+                root.style.alignItems = 'flex-start';
+                root.style.overflow = 'auto';
+            }
+            root.appendChild(div);
+        }
+
+        var originalLog = console.log;
+        var originalError = console.error;
+
+        console.log = function () { originalLog.apply(console, arguments); logToScreen('log', arguments); };
+        console.error = function () { originalError.apply(console, arguments); logToScreen('error', arguments); };
+
+        window.onerror = function (message, source, lineno, colno, error) {
+            logToScreen('error', [message, source, lineno]);
         };
     </script>
 </head>
