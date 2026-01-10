@@ -1,0 +1,45 @@
+/* NUCLEAR SCROLL FIX - Force native scrolling everywhere */
+html,
+body,
+#root,
+.app {
+    height: auto !important;
+    min-height: 100vh !important;
+    overflow-y: visible !important;
+    overflow-x: hidden;
+    /* Keep horizontal hidden to prevent drift */
+    position: static !important;
+    /* Prevent fixed/sticky on wrappers */
+}
+
+/* Ensure content can grow */
+.main-content {
+    height: auto !important;
+    min-height: 0 !important;
+    flex: 1;
+    overflow: visible !important;
+    padding-bottom: 120px !important;
+    /* Extra padding for mobile nav */
+}
+
+/* Fix grid overflow */
+.phases-grid {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: var(--space-4);
+    height: auto !important;
+    overflow: visible !important;
+}
+
+@media (min-width: 768px) {
+    .phases-grid {
+        display: grid !important;
+        grid-template-columns: repeat(2, 1fr) !important;
+    }
+}
+
+@media (min-width: 1280px) {
+    .phases-grid {
+        grid-template-columns: repeat(3, 1fr) !important;
+    }
+}
