@@ -14,6 +14,17 @@
         href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap"
         rel="stylesheet">
     <title>ZeroLogic - Learn Python Programming</title>
+    <script>
+        window.onerror = function (message, source, lineno, colno, error) {
+            var root = document.getElementById('root');
+            root.innerHTML = '<div style="color: red; padding: 20px;">' +
+                '<h1>Global Error</h1>' +
+                '<p>Message: ' + message + '</p>' +
+                '<p>Source: ' + source + '</p>' +
+                '<p>Line: ' + lineno + '</p>' +
+                '</div>';
+        };
+    </script>
 </head>
 
 <body>
