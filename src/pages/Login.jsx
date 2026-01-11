@@ -97,10 +97,11 @@ function Login() {
         <div className="container animate-fadeIn" style={{
             maxWidth: '450px',
             padding: 'var(--space-6)',
-            minHeight: '80vh',
+            minHeight: 'calc(100vh - 40px)', /* Ensure full height centering */
             display: 'flex',
             flexDirection: 'column',
-            justifyContent: 'center'
+            justifyContent: 'center',
+            margin: '0 auto' /* Horizontal centering */
         }}>
             {/* Header */}
             <div className="text-center mb-6">

@@ -599,6 +599,330 @@ s1 = Student("Ali", "101")
 s1.add_grade(85)
 s1.add_grade(90)
 manager.add_student(s1)
-manager.list_all()`
+manager.list_all()\`
+    },
+    
+    // NEW PROJECTS - Added January 2026
+    {
+        id: 'temp-converter',
+        title: 'Temperature Converter',
+        level: 'beginner',
+        phase: 2,
+        description: 'Convert between Celsius and Fahrenheit',
+        concepts: ['Variables', 'Input/Output', 'Operators', 'Conditionals'],
+        difficulty: 1,
+        timeMinutes: 15,
+        instructions: \`
+Create a temperature converter that:
+1. Asks if user wants to convert C to F or F to C
+2. Gets the temperature value
+3. Performs the conversion
+4. Shows the result with units
+
+Formulas:
+- F = (C × 9/5) + 32
+- C = (F - 32) × 5/9\`,
+        starterCode: \`# Temperature Converter
+print("Temperature Converter")
+print("1. Celsius to Fahrenheit")
+print("2. Fahrenheit to Celsius")
+
+choice = input("Enter choice (1 or 2): ")
+
+# TODO: Get temperature and convert
+# Hint: Remember the formulas!
+
+\`,
+        solution: \`print("Temperature Converter")
+print("1. Celsius to Fahrenheit")
+print("2. Fahrenheit to Celsius")
+
+choice = input("Enter choice (1 or 2): ")
+
+if choice == "1":
+    celsius = float(input("Enter temperature in Celsius: "))
+    fahrenheit = (celsius * 9/5) + 32
+    print(celsius, "°C =", round(fahrenheit, 2), "°F")
+elif choice == "2":
+    fahrenheit = float(input("Enter temperature in Fahrenheit: "))
+    celsius = (fahrenheit - 32) * 5/9
+    print(fahrenheit, "°F =", round(celsius, 2), "°C")
+else:
+    print("Invalid choice!")\`
+    },
+    {
+        id: 'even-odd-checker',
+        title: 'Even/Odd Checker',
+        level: 'beginner',
+        phase: 2,
+        description: 'Check if numbers are even or odd using loops',
+        concepts: ['Loops', 'Conditionals', 'Modulo Operator'],
+        difficulty: 1,
+        timeMinutes: 15,
+        instructions: \`
+Create a program that:
+1. Asks how many numbers to check
+2. For each number, tells if it's even or odd
+3. At the end, shows count of even and odd numbers
+
+Hint: Use the modulo operator (%)
+- If number % 2 == 0, it's even\`,
+        starterCode: \`# Even/Odd Checker
+count = int(input("How many numbers do you want to check? "))
+
+even_count = 0
+odd_count = 0
+
+# TODO: Use a loop to check each number
+# Hint: Use modulo operator %
+
+\`,
+        solution: \`count = int(input("How many numbers do you want to check? "))
+
+even_count = 0
+odd_count = 0
+
+for i in range(count):
+    num = int(input(f"Enter number {i+1}: "))
+    if num % 2 == 0:
+        print(num, "is EVEN")
+        even_count += 1
+    else:
+        print(num, "is ODD")
+        odd_count += 1
+
+print()
+print("Summary:")
+print("Even numbers:", even_count)
+print("Odd numbers:", odd_count)\`
+    },
+    {
+        id: 'multiplication-table',
+        title: 'Multiplication Table',
+        level: 'beginner',
+        phase: 6,
+        description: 'Generate multiplication tables using loops',
+        concepts: ['For Loops', 'Range', 'String Formatting'],
+        difficulty: 1,
+        timeMinutes: 15,
+        instructions: \`
+Create a program that:
+1. Asks for a number
+2. Prints its multiplication table (1-10)
+3. Formats it nicely
+
+Example output:
+5 x 1 = 5
+5 x 2 = 10
+... and so on\`,
+        starterCode: \`# Multiplication Table Generator
+number = int(input("Enter a number: "))
+
+print(f"\\nMultiplication Table for {number}")
+print("-" * 20)
+
+# TODO: Use a for loop to print the table
+# Hint: range(1, 11) gives you 1 to 10
+
+\`,
+        solution: \`number = int(input("Enter a number: "))
+
+print(f"\\nMultiplication Table for {number}")
+print("-" * 20)
+
+for i in range(1, 11):
+    result = number * i
+    print(f"{number} x {i} = {result}")\`
+    },
+    {
+        id: 'rock-paper-scissors',
+        title: 'Rock Paper Scissors',
+        level: 'beginner',
+        phase: 6,
+        description: 'Classic game against the computer!',
+        concepts: ['Random', 'Conditionals', 'Loops', 'Lists'],
+        difficulty: 2,
+        timeMinutes: 30,
+        instructions: \`
+Create Rock Paper Scissors game:
+1. Computer randomly picks rock, paper, or scissors
+2. Player makes a choice
+3. Determine who wins:
+   - Rock beats Scissors
+   - Scissors beats Paper
+   - Paper beats Rock
+4. Show the result
+
+Bonus: Add best of 3 rounds!\`,
+        starterCode: \`# Rock Paper Scissors
+import random
+
+choices = ["rock", "paper", "scissors"]
+
+print("Rock Paper Scissors!")
+print("-" * 20)
+
+# Computer's choice
+computer = random.choice(choices)
+
+# Player's choice
+player = input("Enter rock, paper, or scissors: ").lower()
+
+# TODO: Check who wins!
+# Hint: Use if-elif-else to check all cases
+
+print(f"Computer chose: {computer}")
+
+\`,
+        solution: \`import random
+
+choices = ["rock", "paper", "scissors"]
+
+print("Rock Paper Scissors!")
+print("-" * 20)
+
+computer = random.choice(choices)
+player = input("Enter rock, paper, or scissors: ").lower()
+
+print(f"\\nYou chose: {player}")
+print(f"Computer chose: {computer}")
+print()
+
+if player == computer:
+    print("It's a TIE!")
+elif player == "rock":
+    if computer == "scissors":
+        print("You WIN! Rock beats Scissors")
+    else:
+        print("You LOSE! Paper beats Rock")
+elif player == "paper":
+    if computer == "rock":
+        print("You WIN! Paper beats Rock")
+    else:
+        print("You LOSE! Scissors beats Paper")
+elif player == "scissors":
+    if computer == "paper":
+        print("You WIN! Scissors beats Paper")
+    else:
+        print("You LOSE! Rock beats Scissors")
+else:
+    print("Invalid choice!")\`
+    },
+    {
+        id: 'number-guessing',
+        title: 'Number Guessing Game',
+        level: 'beginner',
+        phase: 6,
+        description: 'Guess the secret number with hints!',
+        concepts: ['While Loops', 'Random', 'Conditionals'],
+        difficulty: 2,
+        timeMinutes: 25,
+        instructions: \`
+Create a number guessing game:
+1. Computer picks a random number (1-100)
+2. Player guesses
+3. Give hints: "Too high!" or "Too low!"
+4. Count guesses and show at the end
+5. Loop until correct guess
+
+Bonus: Limit to 10 attempts!\`,
+        starterCode: \`# Number Guessing Game
+import random
+
+secret = random.randint(1, 100)
+guesses = 0
+
+print("I'm thinking of a number between 1 and 100...")
+print()
+
+# TODO: Create a loop that keeps asking for guesses
+# Hint: Use a while loop
+
+\`,
+        solution: \`import random
+
+secret = random.randint(1, 100)
+guesses = 0
+
+print("I'm thinking of a number between 1 and 100...")
+print()
+
+while True:
+    guess = int(input("Your guess: "))
+    guesses += 1
+    
+    if guess == secret:
+        print(f"\\nCongratulations! You got it in {guesses} guesses!")
+        break
+    elif guess < secret:
+        print("Too low! Try again.")
+    else:
+        print("Too high! Try again.")\`
+    },
+    {
+        id: 'password-generator',
+        title: 'Password Generator',
+        level: 'intermediate',
+        phase: 7,
+        description: 'Generate secure random passwords',
+        concepts: ['Strings', 'Random', 'Lists', 'Loops'],
+        difficulty: 2,
+        timeMinutes: 25,
+        instructions: \`
+Create a password generator that:
+1. Asks for password length
+2. Asks what to include (uppercase, numbers, symbols)
+3. Generates a random password
+4. Shows the password
+
+Use: random.choice() to pick random characters\`,
+        starterCode: \`# Password Generator
+import random
+import string
+
+print("Password Generator")
+
+# Character sets
+lowercase = string.ascii_lowercase  # a-z
+uppercase = string.ascii_uppercase  # A-Z
+digits = string.digits              # 0-9
+symbols = "!@#$%^&*"
+
+length = int(input("Password length: "))
+
+# TODO: Build character set based on user choices
+# TODO: Generate random password
+
+\`,
+        solution: \`import random
+import string
+
+print("Password Generator")
+print("-" * 20)
+
+lowercase = string.ascii_lowercase
+uppercase = string.ascii_uppercase
+digits = string.digits
+symbols = "!@#$%^&*"
+
+length = int(input("Password length: "))
+
+# Build character set
+chars = lowercase  # Always include lowercase
+
+if input("Include uppercase? (y/n): ").lower() == "y":
+    chars += uppercase
+if input("Include numbers? (y/n): ").lower() == "y":
+    chars += digits
+if input("Include symbols? (y/n): ").lower() == "y":
+    chars += symbols
+
+# Generate password
+password = ""
+for i in range(length):
+    password += random.choice(chars)
+
+print()
+print("Your password:", password)`
     }
 ]

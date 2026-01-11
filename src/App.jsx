@@ -14,6 +14,8 @@ import Lesson from './pages/Lesson'
 import Practice from './pages/Practice'
 import Login from './pages/Login'
 import Projects from './pages/Projects'
+import Playground from './pages/Playground'
+import Analytics from './pages/Analytics'
 import Diagnostic from './pages/Diagnostic'
 import ResetPassword from './pages/ResetPassword'
 import { lessons, phases } from './content/lessons'
@@ -28,7 +30,9 @@ export function useProgress() {
 const defaultProgress = {
     completedLessons: [],
     currentLesson: null,
-    lastVisited: null
+    lastVisited: null,
+    streak: 0,
+    streakLastDate: null
 }
 
 function AppContent() {
@@ -88,11 +92,36 @@ function AppContent() {
     }, [progress, user])
 
     const markLessonComplete = useCallback((lessonId) => {
-        setProgress(prev => ({
-            ...prev,
-            completedLessons: [...new Set([...prev.completedLessons, lessonId])],
-            lastVisited: lessonId
-        }))
+        setProgress(prev => {
+            const today = new Date().toDateString()
+            const yesterday = new Date(Date.now() - 86400000).toDateString()
+
+            let newStreak = prev.streak || 0
+            const lastDate = prev.streakLastDate
+
+            // Update streak logic
+            if (lastDate !== today) {
+                if (lastDate === yesterday) {
+                    // Continue streak
+                    newStreak = newStreak + 1
+                } else if (!lastDate) {
+                    // First time learning
+                    newStreak = 1
+                } else {
+                    // Streak broken, start over
+                    newStreak = 1
+                }
+            }
+            // If already learned today, keep same streak
+
+            return {
+                ...prev,
+                completedLessons: [...new Set([...prev.completedLessons, lessonId])],
+                lastVisited: lessonId,
+                streak: newStreak,
+                streakLastDate: today
+            }
+        })
     }, [])
 
     const setCurrentLesson = useCallback((lessonId) => {
@@ -140,6 +169,8 @@ function AppContent() {
         setCurrentLesson,
         getPhaseProgress,
         getTotalProgress,
+        streak: progress.streak || 0,
+        streakLastDate: progress.streakLastDate,
         lessons,
         phases,
         loading
@@ -179,6 +210,16 @@ function AppContent() {
                         <Route path="/diagnostic" element={
                             <ProtectedRoute>
                                 <Diagnostic />
+                            </ProtectedRoute>
+                        } />
+                        <Route path="/playground" element={
+                            <ProtectedRoute>
+                                <Playground />
+                            </ProtectedRoute>
+                        } />
+                        <Route path="/analytics" element={
+                            <ProtectedRoute>
+                                <Analytics />
                             </ProtectedRoute>
                         } />
                         <Route path="/reset-password" element={<ResetPassword />} />

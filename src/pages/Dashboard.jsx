@@ -1,8 +1,10 @@
 import { Link } from 'react-router-dom'
 import { useProgress } from '../App'
+import StreakDisplay from '../components/streaks/StreakDisplay'
+import BadgeDisplay from '../components/achievements/BadgeDisplay'
 
 function Dashboard() {
-    const { phases, lessons, completedLessons, getPhaseProgress, getTotalProgress, lastVisited } = useProgress()
+    const { phases, lessons, completedLessons, getPhaseProgress, getTotalProgress, lastVisited, streak, streakLastDate } = useProgress()
     const totalProgress = getTotalProgress()
 
     // Get continue lesson or first lesson
@@ -12,6 +14,11 @@ function Dashboard() {
     return (
         <div className="container animate-fadeIn">
             <h1 className="mb-6">Your Dashboard</h1>
+
+            {/* Streak Display */}
+            <div className="mb-6">
+                <StreakDisplay />
+            </div>
 
             <div className="grid-desktop-2 gap-6 mb-8">
                 {/* Overall Progress Card */}
@@ -85,7 +92,13 @@ function Dashboard() {
                 })}
             </div>
 
-            <h3 className="mb-4">Recent Actvity</h3>
+            {/* Achievements */}
+            <h3 className="mb-4">Achievements</h3>
+            <div className="card mb-8">
+                <BadgeDisplay />
+            </div>
+
+            <h3 className="mb-4">Recent Activity</h3>
             {completedLessons.length === 0 ? (
                 <div className="card text-center py-8">
                     <p className="text-secondary mb-4">No lessons completed yet. Start your journey today!</p>

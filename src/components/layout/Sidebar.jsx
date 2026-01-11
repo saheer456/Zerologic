@@ -39,6 +39,12 @@ function Sidebar({ isOpen }) {
                 <Link to="/projects" className="sidebar-quick-link">
                     <span>🛠️</span> Projects
                 </Link>
+                <Link to="/playground" className="sidebar-quick-link">
+                    <span>🎮</span> Playground
+                </Link>
+                <Link to="/analytics" className="sidebar-quick-link">
+                    <span>📈</span> Analytics
+                </Link>
             </div>
 
             <div className="sidebar-divider"></div>

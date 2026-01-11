@@ -7,6 +7,7 @@ import PlainEnglish from '../components/lesson/PlainEnglish'
 import SyntaxSection from '../components/lesson/SyntaxSection'
 import CommonMistakes from '../components/lesson/CommonMistakes'
 import MicroPractice from '../components/lesson/MicroPractice'
+import LessonNotes from '../components/lesson/LessonNotes'
 
 function Lesson() {
     const { lessonId } = useParams()
@@ -58,6 +59,9 @@ function Lesson() {
                 </div>
                 <h1>{lesson.title}</h1>
             </header>
+
+            {/* Personal Notes */}
+            <LessonNotes lessonId={lessonId} />
 
             {/* 6-Step Learning Model */}
             <MentalModel data={lesson.mentalModel} />

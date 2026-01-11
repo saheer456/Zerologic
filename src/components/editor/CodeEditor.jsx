@@ -157,19 +157,7 @@ sys.stdout = StringIO()
                     onKeyDown={handleKeyDown}
                     readOnly={readOnly}
                     spellCheck={false}
-                    style={{
-                        width: '100%',
-                        minHeight: '150px',
-                        padding: 'var(--space-4)',
-                        fontFamily: 'var(--font-mono)',
-                        fontSize: 'var(--text-sm)',
-                        lineHeight: 1.6,
-                        background: 'var(--color-bg-secondary)',
-                        color: 'var(--color-text-primary)',
-                        border: 'none',
-                        resize: 'vertical',
-                        outline: 'none'
-                    }}
+                    className="code-editor-textarea"
                     placeholder="Write your Python code here..."
                 />
             </div>

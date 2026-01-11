@@ -1,18 +1,13 @@
-import { Link, useLocation, useNavigate } from 'react-router-dom'
+import { Link, useLocation } from 'react-router-dom'
 import { useProgress } from '../../App'
 import { useAuth } from '../../context/AuthContext'
+import UserDropdown from './UserDropdown'
 
 function Navbar({ onToggleSidebar }) {
     const location = useLocation()
-    const navigate = useNavigate()
     const { getTotalProgress } = useProgress()
-    const { user, signOut, loading } = useAuth()
+    const { user, loading } = useAuth()
     const totalProgress = getTotalProgress()
-
-    const handleSignOut = async () => {
-        await signOut()
-        navigate('/')
-    }
 
     return (
         <nav className="nav">
@@ -55,39 +50,10 @@ function Navbar({ onToggleSidebar }) {
                         Dashboard
                     </Link>
 
-                    {/* Auth buttons */}
+                    {/* User dropdown or Sign In */}
                     {!loading && (
                         user ? (
-                            <div className="flex items-center gap-2">
-                                <div
-                                    className="hidden md:flex items-center gap-2"
-                                    style={{
-                                        padding: 'var(--space-1) var(--space-3)',
-                                        background: 'var(--color-bg-glass)',
-                                        borderRadius: 'var(--radius-full)'
-                                    }}
-                                >
-                                    <div style={{
-                                        width: '28px',
-                                        height: '28px',
-                                        borderRadius: '50%',
-                                        background: 'linear-gradient(135deg, var(--color-primary), var(--color-secondary))',
-                                        display: 'flex',
-                                        alignItems: 'center',
-                                        justifyContent: 'center',
-                                        fontSize: 'var(--text-sm)',
-                                        fontWeight: 'bold'
-                                    }}>
-                                        {user.email?.[0]?.toUpperCase() || 'U'}
-                                    </div>
-                                    <span className="text-sm hidden lg:block" style={{ maxWidth: '100px', overflow: 'hidden', textOverflow: 'ellipsis' }}>
-                                        {user.email?.split('@')[0]}
-                                    </span>
-                                </div>
-                                <button onClick={handleSignOut} className="btn btn-ghost" style={{ padding: 'var(--space-2) var(--space-3)' }}>
-                                    Sign Out
-                                </button>
-                            </div>
+                            <UserDropdown />
                         ) : (
                             <Link to="/login" className="btn btn-primary">
                                 Sign In
@@ -101,3 +67,4 @@ function Navbar({ onToggleSidebar }) {
 }
 
 export default Navbar
+
