@@ -176,7 +176,7 @@ function Home() {
                                     to={`/lesson/${phase.firstLesson}`}
                                     className={`btn ${phaseProgress.completed > 0 ? 'btn-primary' : 'btn-secondary'} w-full`}
                                 >
-                                    {phaseProgress.completed > 100 ? 'Review Phase' : phaseProgress.completed > 0 ? 'Resume Journey' : 'Begin Journey'}
+                                    {phaseProgress.completed >= phaseProgress.total ? 'Review Phase' : phaseProgress.completed > 0 ? 'Resume Journey' : 'Begin Journey'}
                                 </Link>
                             </div>
                         )

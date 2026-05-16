@@ -869,14 +869,18 @@ print(is_minor)  # False`,
 ]
 
 // Combine all lessons from all phases
-export const lessons = [
+const allLessons = [
     ...phase0to3Lessons,
     ...phase4to7Lessons,
     ...phase8to14Lessons,
     ...additionalLessons,
     ...advancedLessons
-].sort((a, b) => {
-    // Sort by phase, then by original order
+]
+
+// Assign stable sort indices before sorting
+allLessons.forEach((lesson, index) => { lesson._sortIndex = index })
+
+export const lessons = allLessons.sort((a, b) => {
     if (a.phase !== b.phase) return a.phase - b.phase
-    return 0
+    return a._sortIndex - b._sortIndex
 })

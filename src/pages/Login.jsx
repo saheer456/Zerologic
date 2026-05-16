@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useAuth } from '../context/AuthContext'
 
@@ -20,10 +20,13 @@ function Login() {
     const [learningGoal, setLearningGoal] = useState('')
 
     // Redirect if already logged in
-    if (user) {
-        navigate('/')
-        return null
-    }
+    useEffect(() => {
+        if (user) {
+            navigate('/')
+        }
+    }, [user, navigate])
+
+    if (user) return null
 
     const handleSubmit = async (e) => {
         e.preventDefault()
